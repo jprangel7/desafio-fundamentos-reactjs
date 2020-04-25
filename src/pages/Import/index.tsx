@@ -28,14 +28,24 @@ const Import: React.FC = () => {
     // TODO
 
     try {
-      // await api.post('/transactions/import', data);
+      await api.post('/transactions/import', data);
     } catch (err) {
-      // console.log(err.response.error);
+      console.log(err.response.error);
     }
   }
 
   function submitFile(files: File[]): void {
-    // TODO
+    console.log(files);
+    files.forEach(file => {
+      const fileSize = filesize(file.size);
+      const newFile: FileProps = {
+        file,
+        name: file.name,
+        readableSize: fileSize,
+      };
+      console.log(newFile);
+      setUploadedFiles([...uploadedFiles, newFile]);
+    });
   }
 
   return (
